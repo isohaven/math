@@ -21,12 +21,10 @@ def taylor(f, degree):
 factorial_cache = {}
 def memoized_factorial(n):
     if n == 0:
-        return n
+        return 1
     elif n in factorial_cache:
-        return factorial_cache[n]
+        return factorial_cache[str(n)]
     else:
         ans = n * memoized_factorial(n-1)
-        factorial_cache[n] = ans
+        factorial_cache[str(n)] = ans
         return ans
-
-plt.show()
