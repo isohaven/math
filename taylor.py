@@ -18,5 +18,15 @@ plt.plot(x, f(x))
 def taylor(f, degree):
     coeffs = []
 
+factorial_cache = {}
+def memoized_factorial(n):
+    if n == 0:
+        return n
+    elif n in factorial_cache:
+        return factorial_cache[n]
+    else:
+        ans = n * memoized_factorial(n-1)
+        factorial_cache[n] = ans
+        return ans
 
 plt.show()
