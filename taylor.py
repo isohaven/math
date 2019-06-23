@@ -7,16 +7,15 @@ f = lambda x: np.sin(x)
 # interval   min, max, step
 x = np.arange(-10, 10, 0.1)
 
-# symmetric derivitive to aproximate
-# derivitive at point 'c'
-def derive(f, c, h=1e-5):
-    return (f(c+h) - f(c-h)) / (2*h)
+# find nth derivitive of function f at point 'c'
 def nth_derive(f, c, n, h=1e-5):
-    pro = memoized_factorial(n) * (1 / (h**n))
-    summation = 0
-    for m in range(n+1):
-        summation +=  ( (-1)**(m+n) ) * (1/(memoized_factorial(m) * memoized_factorial(n-m) )) * f(c + m*h)
-    return pro*summation
+    if n == 0:
+        return f(c)
+    elif n == 1:
+        # symmetric derivitive to aproximate
+        return (f(c+h) - f(c-h)) / (2*h)
+    else:
+        return (nth_derive(f, c+h, n-1, h) - nth_derive(f, c-h, n-1, h)) / (2*h)
 # plot function
 plt.plot(x, f(x))
 
@@ -34,5 +33,5 @@ def memoized_factorial(n):
         ans = n * memoized_factorial(n-1)
         factorial_cache[str(n)] = ans
         return ans
-print(derive(f, np.pi/3))
-print(nth_derive(f, np.pi/3, 4, h=1e-6))
+print(nth_derive(f, np.pi/3, 4, h=1e-8))
+print(nth_derive(f, np.pi/3, 1, h=1e-9))
