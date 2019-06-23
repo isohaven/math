@@ -1,3 +1,4 @@
+import numpy as np
 def integrate(f, a=-1, b=1, n=100):
     # implementation from
     # https://www.math.ubc.ca/~pwalls/math-python/integration/simpsons-rule/
@@ -8,4 +9,5 @@ def integrate(f, a=-1, b=1, n=100):
     y = f(x)
     _sum = delta_x/3 * np.sum(y[0:-1:2] + 4*y[1::2] + y[2::2])
     return _sum
-
+f = lambda x: np.sin(x)
+print(integrate(f, a=0, b=1))
