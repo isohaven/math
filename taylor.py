@@ -8,14 +8,11 @@ f = lambda x: np.sin(x)
 x = np.arange(-10, 10, 0.1)
 
 # find nth derivitive of function f at point 'c'
-def nth_derive(f, c, n, h=1e-5):
-    if n == 0:
-        return f(c)
-    elif n == 1:
-        # symmetric derivitive to aproximate
-        return (f(c+h) - f(c-h)) / (2*h)
-    else:
-        return (nth_derive(f, c+h, n-1, h) - nth_derive(f, c-h, n-1, h)) / (2*h)
+#TODO use Cauchy's integral formula to accurately compute
+# higher order derivitives
+
+f_arg= np.complex128(x + contourRadius*np.exp(1j*theta))
+factor = np.complex128( (1/np.exp(
 # plot function
 plt.plot(x, f(x))
 
