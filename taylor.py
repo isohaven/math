@@ -7,12 +7,17 @@ f = lambda x: np.sin(x)
 # interval   min, max, step
 x = np.arange(-10, 10, 0.1)
 
-# find nth derivitive of function f at point 'c'
+# find nth derivitive of function 'f' at point 'c'
 #TODO use Cauchy's integral formula to accurately compute
 # higher order derivitives
+def nth_derivitive(f, c, n, contour_radius=6.9):
+    f_arg= np.complex128(x + contourRadius*np.exp(1j*theta))
+    factor = (1/contourRadius)**n * np.complex128(np.exp(-1j * n * theta))
+    integrand = f(f_arg) * factor
 
-f_arg= np.complex128(x + contourRadius*np.exp(1j*theta))
-factor = np.complex128( (1/np.exp(
+# use simpson's rule to integrate a function 'f'
+def integrate(f, a=-1, b=1):
+    pass
 # plot function
 plt.plot(x, f(x))
 
