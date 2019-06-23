@@ -10,11 +10,15 @@ x = np.arange(-10, 10, 0.1)
 # find nth derivitive of function 'f' at point 'c'
 #TODO use Cauchy's integral formula to accurately compute
 # higher order derivitives
-def nth_derivitive(f, c, n, contour_radius=6.9):
-    f_arg= np.complex128(x + contourRadius*np.exp(1j*theta))
-    factor = (1/contourRadius)**n * np.complex128(np.exp(-1j * n * theta))
-    integrand = f(f_arg) * factor
-
+def nth_derivitive(f, c, n, dtheta=1e-3, contour_radius=6):
+    _sum = 0
+    theta = 0
+    while theta < 2*np.pi:
+        f_arg= np.complex128(c + contour_radius*np.exp(1j*theta))
+        factor = (1/contour_radius)**n * np.complex128(np.exp(-1j * n * theta))
+        _sum += f(f_arg) * factor * dtheta
+        theta += dtheta
+    return memoized_factorial(n) * _sum.real / (2*np.pi)
 # use simpson's rule to integrate a function 'f'
 def integrate(f, a=-1, b=1, n=100):
     # implementation from
@@ -44,4 +48,4 @@ def memoized_factorial(n):
         ans = n * memoized_factorial(n-1)
         factorial_cache[str(n)] = ans
         return ans
-print(integrate(f, -1, 1, n=10))
+print(nth_derivitive(f, np.pi/3, 10))
