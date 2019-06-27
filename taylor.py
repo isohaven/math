@@ -19,17 +19,6 @@ def nth_derivitive(f, c, n, dtheta=1e-3, contour_radius=6):
         _sum += f(f_arg) * factor * dtheta
         theta += dtheta
     return memoized_factorial(n) * _sum.real / (2*np.pi)
-# use simpson's rule to integrate a function 'f'
-def integrate(f, a=-1, b=1, n=100):
-    # implementation from
-    # https://www.math.ubc.ca/~pwalls/math-python/integration/simpsons-rule/
-    if n % 2 != 0:
-        n += 1
-    delta_x = (b-a)/n
-    x = np.linspace(a, b, n+1)
-    y = f(x)
-    _sum = delta_x/3 * np.sum(y[0:-1:2] + 4*y[1::2] + y[2::2])
-    return _sum
 
 # plot function
 plt.plot(x, f(x))
