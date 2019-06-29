@@ -17,7 +17,7 @@ def nth_derivitive(f, c, n, ):
 
   f_arg = np.complex128(c + np.exp(1j*theta))
   factor = np.complex128(np.exp(-1j * n * theta))
-  integrand = f(f_arg) * factor
+  integrand = f(f_arg) * factor  
   _sum = delta_theta/3 * np.sum(integrand[0:-1:2] + 4*integrand[1::2] + integrand[2::2])
   return memoized_factorial(n) * _sum.real / (2*np.pi)
 # plot function
